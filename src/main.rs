@@ -68,9 +68,31 @@ static MORSE_CODE_MAP: phf::Map<&'static str, char> = phf_map! {
     "1100" => 'Z',
 };
 
-fn listen(pins: Pins) -> () {
+enum Direction {
+    Up,
+    Down,
+    Left,
+    Right,
+}
+
+fn listen(pins: &Pins) -> Direction {
     let listener_pin: Pin<Gpio25, FunctionSio<SioOutput>, PullDown> =
         pins.led.into_push_pull_output();
+
+    loop {
+        let mut paddle_direction: u64 = 0;
+
+        match paddle_direction {
+            1..=2 => return Direction::Up,
+            3..=4 => return Direction::Down,
+            5..=6 => return Direction::Left,
+            7..=8 => return Direction::Right,
+            _ => {
+                info!("how the fuck did you do this???");
+                continue;
+            }
+        }
+    }
 }
 
 #[entry]
