@@ -2,9 +2,10 @@
 #include <cstdio>
 
 int main() {
-    stdio_init_all();
+    stdio_init_all();  // Initializes USB and UART stdio
+
     while (true) {
-        printf("Hello Pico!\n");
+        printf("Pico W is running!\n");
         sleep_ms(1000);
     }
 }
