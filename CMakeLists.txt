@@ -1,16 +1,21 @@
 cmake_minimum_required(VERSION 3.13)
+include($ENV{PICO_SDK_PATH}/pico_sdk_init.cmake)
 
-project(my_iot_project C CXX ASM)
+project(morse-telegraph C CXX ASM)
 
-include(pico_sdk_import.cmake)
-
+# Initialize the Pico SDK
 pico_sdk_init()
 
-add_executable(my_iot_project main.cpp)
+add_executable(morse-telegraph
+    main.cpp
+)
 
-target_link_libraries(my_iot_project pico_stdlib)
+# Enable USB output (optional, useful for debugging)
+pico_enable_stdio_usb(morse-telegraph 1)
+pico_enable_stdio_uart(morse-telegraph 0)
 
-pico_enable_stdio_usb(my_iot_project 1)
-pico_enable_stdio_uart(my_iot_project 0)
+# Link the Pico standard libraries
+target_link_libraries(morse-telegraph pico_stdlib)
 
-pico_add_extra_outputs(my_iot_project)
+# Create UF2 file for flashing
+pico_add_extra_outputs(morse-telegraph)

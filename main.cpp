@@ -1,13 +1,10 @@
 #include "pico/stdlib.h"
+#include <cstdio>
 
-int main()
-{
-    stdio_init_all(); // enable USB serial
-
-    while (true)
-    {
-        printf("Hello, bare-metal IoT!\n");
+int main() {
+    stdio_init_all();
+    while (true) {
+        printf("Hello Pico!\n");
         sleep_ms(1000);
     }
 }
-
