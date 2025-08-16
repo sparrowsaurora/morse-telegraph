@@ -1,0 +1,19 @@
+{
+    "configurations": [
+        {
+            "name": "WSL",
+            "includePath": [
+                "${workspaceFolder}/**",
+                "/home/sparrow/source/repos/pico-sdk/**"
+            ],
+            "defines": [
+                "PICO_PLATFORM=\"rp2040\""
+            ],
+            "compilerPath": "/usr/bin/arm-none-eabi-g++",
+            "cStandard": "c11",
+            "cppStandard": "c++17",
+            "intelliSenseMode": "linux-gcc-arm"
+        }
+    ],
+    "version": 4
+}
