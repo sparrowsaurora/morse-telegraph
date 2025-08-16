@@ -2,6 +2,7 @@
 #include <tuple>
 
 #include "hardware/adc.h"
+#include "joystick.hpp"
 #include "morse.hpp"
 #include "pico/stdlib.h"
 
@@ -50,24 +51,18 @@ void setup() {
 
 int main() {
     setup();
+    sleep_ms(2000);  // wait for serial port start
 
-    // ADC chanels
-    const uint X_CHANNEL = 0;
-    const uint Y_CHANNEL = 1;
-
+    Joystick js(26, 27, 22);
     while (true) {
-        // Read analog joystick positions
-        adc_select_input(X_CHANNEL);
-        uint16_t x_val = adc_read();  // 0 - 4095
-        adc_select_input(Y_CHANNEL);
-        uint16_t y_val = adc_read();  // 0 - 4095
-
-        print(x_val, y_val);
-
         // Test conversions
         // std::cout << "C -> " << char_to_morse('C') << std::endl;        // "1010"
         // std::cout << "1010 -> " << morse_to_char("1010") << std::endl;  // 'C'
-
+        js.read();
+        std::cout << "X: " << js.getX()
+                  << " | Y: " << js.getY()
+                  << " | Button: " << (js.isPressed() ? "Pressed" : "Released")
+                  << std::endl;
         sleep_ms(200);
     }
 }
